@@ -1,0 +1,31 @@
+// Base TypeScript configuration.
+// 初心者向け説明:
+// - target: Node.js 20 で安定な ES2022 機能にトランスパイル
+// - module/moduleResolution: ESM + Node 解決 (import 拡張子要件含む) を統一
+// - lib: DOM 型不要のため ES2022 のみ
+// - strict: 厳格モードで潜在バグを早期検出
+// - noUncheckedIndexedAccess: arr[i] の undefined 可能性を型へ反映
+// - exactOptionalPropertyTypes: プロパティ未定義 と undefined を区別
+// - skipLibCheck: 依存ライブラリ型チェック高速化 (安定後に false 検討)
+// - baseUrl: ルート相対 import を簡潔化
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "allowImportingTsExtensions": false,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "baseUrl": "./src"
+  }
+}

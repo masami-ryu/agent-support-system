@@ -1,0 +1,10 @@
+{
+  // ビルド用設定。宣言ファイルや sourceMap は tsconfig.base.json で有効化済み。
+  // 必要に応じて production 最適化 (removeComments など) をここに追加可能。
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["test", "dist", "node_modules"]
+}

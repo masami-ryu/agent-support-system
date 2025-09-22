@@ -1,0 +1,10 @@
+{
+  // Type-check 専用設定。ビルド時は tsconfig.build.json を使用。
+  // noEmit: true により出力を生成せず型エラー検出だけを行う。
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "exclude": ["dist", "node_modules"]
+}
