@@ -63,9 +63,8 @@ flowchart LR
   P -->|失敗| E1[PARSE_ERROR]
   P --> Z[Zod schema parse]
   Z -->|失敗| E2[VALIDATION_ERROR]
-  Z --> H[handle()]
-
-  H -->|listTools| L[listTools()] --> R1[結果整形]
+  Z --> H[handle]
+  H -->|listTools| L[listTools] --> R1[結果整形]
   H -->|callTool| T[tool registry] --> R2[tool result]
   R1 --> O[STDOUT JSON]
   R2 --> O
