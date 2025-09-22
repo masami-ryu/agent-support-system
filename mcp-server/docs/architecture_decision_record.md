@@ -108,11 +108,11 @@
 ## 9. スキーマバリデーション詳細
 ```mermaid
 flowchart LR
-	A[Raw JSON Input] --> B[Parse(JSON.parse)]
-	B --> C{Zod parse (request)}
+	A[Raw JSON Input] --> B[Parse: JSON.parse]
+	B --> C{Zod parse: request}
 	C -->|ok| D[Dispatch Tool]
 	C -->|err| E[Validation Error]
-	D --> F{Zod parse (response)}
+	D --> F{Zod parse: response}
 	F -->|ok| G[Send Response]
 	F -->|err| E
 ```
