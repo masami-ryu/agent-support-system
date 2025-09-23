@@ -1,6 +1,6 @@
 # コードレビュー観点ガイド (for AI Agent & Human Reviewers)
 
-> 補助: 具体的な AIエージェント への指示テンプレートは [agent_review_prompts.md](./agent_review_prompts.md) を参照してください。
+> 補助: 具体的な AIエージェント への指示テンプレートは [review_prompts.md](./review_prompts.md) を参照してください。
 
 このガイドは コードレビュー時に AI Agent や人が一貫した指摘を行えるようにするための詳細観点集です。  
 PR テンプレートから参照され、自動レビュー支援にも利用されます。
