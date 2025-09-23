@@ -19,20 +19,24 @@ AIエージェントが効果的にシステム設計をサポートできるよ
 - AIエージェントを活用したい技術者
 - プロジェクトマネージャー
 
-## ディレクトリ構成
+## ディレクトリ構成 (概要)
 
 ```
 agent-support-system/
-├── README.md               # プロジェクト概要（このファイル）
-├── instructions/           # AIエージェント設定ファイル
-│   ├── role.md             # エージェントの役割定義
-│   └── language.md         # 言語設定とレスポンス形式
-├── docs/                   # (現在空 / 追加予定)
-└── mcp-server/             # MCP Server (Node.js + TypeScript) プロトタイプ
-    ├── README.md           # 最小利用ガイド (Quick Start)
+├── README.md                         # プロジェクト概要（このファイル）
+├── instructions/                     # AIエージェント基本ポリシー
+│   ├── role.md                       # 役割定義 (シニアソフトウェアエンジニア等)
+│   └── language.md                   # 日本語出力 / コード識別子扱い
+├── docs/                             # ナレッジ & レビュー運用ドキュメント
+│   ├── review_guide.md               # コードレビュー観点ガイド
+│   ├── review_prompts.md             # 観点別プロンプトテンプレ集
+│   ├── agent_review_usage.md         # プロンプト活用手順 / 運用リズム
+│   └── (追加予定) pattern_*.md など   # 設計パターン / 事例
+└── mcp-server/                       # MCP Server (Node.js + TypeScript) プロトタイプ
+    ├── README.md                     # Quick Start
     └── docs/
-        ├── architecture_decision_record.md       # 技術選定と将来計画 (ADR)
-        └── mcp_jsonrpc_learning_guide.md         # MCP / JSON-RPC 学習ガイド
+        ├── architecture_decision_record.md  # 技術選定と将来計画 (ADR)
+        └── mcp_jsonrpc_learning_guide.md    # MCP / JSON-RPC 学習ガイド
 ```
 
 ### instructions/
@@ -47,27 +51,58 @@ AIエージェントが参照する基本設定とルールを定義します。
 3. `mcp-server/docs/architecture_decision_record.md`: 技術選定とリスク/将来拡張の正式記録
 
 ### docs/ (ルート)
-将来的にシステム設計支援の共通ベストプラクティスやパターン集を配置予定です（現時点では空）。
+レビューと設計ナレッジの中核。現時点で以下を整備済み:
+- `review_guide.md`: 重大度接頭辞・観点チェックリスト・指摘記法基準
+- `review_prompts.md`: 自動レビュー向け統一プロンプト (日本語出力強制ラッパ含む)
+- `agent_review_usage.md`: 利用シーン別の投入タイミング / スコープ絞り込み例 / FAQ
+
+今後追加予定:
+- 設計パターン (`pattern_*.md`)
+- 失敗事例集 / アンチパターン (`anti_pattern_*.md`)
+- プロンプト品質評価指標と改善サイクルガイド
 
 ## 利用開始フロー (推奨)
-1. `instructions/` の内容をエージェントに読み込ませ基本ポリシーを確立
-2. `mcp-server/README.md` に従いローカル MCP Server を起動
-3. `mcp_jsonrpc_learning_guide.md` で入出力・ツール追加の理解を深める
-4. 必要な判断背景を ADR で参照し方針整合性を確認
-5. 独自ツール / バリデーション / 観測性 を段階的に拡張
+1. ポリシー読込: `instructions/role.md` と `instructions/language.md` をエージェントへ提示
+2. レビュー基盤理解: `docs/review_guide.md` を通読し接頭辞/観点を把握
+3. 自動レビュー準備: `docs/review_prompts.md` の基本プロンプトを PR テンプレ or スニペットへ登録
+4. 運用手順習得: `docs/agent_review_usage.md` で投入タイミングとスコープ絞り込みを把握
+5. 実行: Draft PR 作成 → 基本プロンプト投入 → 指摘反映 → 観点別追加プロンプト
+6. 拡張学習: `mcp-server/README.md` & `mcp_jsonrpc_learning_guide.md` でツール追加方法を理解
+7. アーキ背景参照: `architecture_decision_record.md` で設計判断と将来方針を確認
+8. 運用改善: 指摘ログを蓄積し頻出/冗長指摘を `review_prompts.md` にフィードバック
 
 ## 今後の計画 (Backlog 抜粋)
-- [ ] システム設計パターン集の作成 (ルート `docs/` へ)
-- [ ] AIエージェント活用事例の収集
-- [ ] プロンプトテンプレート集の整備
-- [ ] 評価指標とフィードバック機能の追加
-- [ ] MCP Server: Vitest テスト & CI ワークフロー
-- [ ] MCP Server: 観測性 (構造化ログ → メトリクス → トレース)
+### ドキュメント/ナレッジ
+- [ ] システム設計パターン集 (`docs/pattern_*.md`)
+- [ ] アンチパターン / 失敗事例集 (`docs/anti_pattern_*.md`)
+- [ ] プロンプト品質評価指標 (再現率 / 過剰指摘率 / 平均修正リードタイム)
+- [ ] 自動リンク検証 CI (Markdown lint)  
+
+### MCP Server 技術面
+- [ ] Vitest 導入 & 基本正常/異常系テスト
+- [ ] CI ワークフロー (lint / test / type-check)
+- [ ] 観測性: 構造化ログ → 実行時間メトリクス → トレーシング
+- [ ] 動的ツールロード & JSON Schema エクスポート
+- [ ] Rate limit / エラー分類拡張
+
+### 運用改善
+- [ ] プロンプト差分品質レビューの定期集計 (週次)
+- [ ] 指摘クラスター分析によるテンプレ最適化
+- [ ] フィードバックループ: PR マージ後 post-mortem テンプレ追加
 
 ## 貢献方法
-1. 変更意図を簡潔に Issue / PR 説明へ
-2. 仕様/判断の恒久的影響がある場合は ADR へ履歴追加
-3. 可能なら最小テスト (正常/異常) を添付
+1. Issue / PR: 目的 (Problem) / 変更概要 (Change) / 期待効果 (Impact) を簡潔に記述
+2. 恒久的な設計判断は `architecture_decision_record.md` に ADR 追記
+3. 可能な限りテスト (正常/境界/異常) と再現手順を添付
+4. プロンプト/ガイド改善は `[docs]` 接頭辞で PR タイトル開始
+5. 大規模変更は分割方針 (Split Plan) を最初のコメントに含める
 
 ## ライセンス
-このプロジェクトのライセンスについては、組織のポリシーに従ってください。
+このリポジトリは MIT License で提供されます。詳細はルートの `LICENSE` ファイルを参照してください。
+
+MIT を選択した理由 (参考):
+- 利用/改変/再配布/商用利用をシンプルに許可しコントリビューション参入障壁が低い
+- 特許条項が不要な小規模・学習/支援ツール用途に十分
+- 追加の NOTICE / ファイル単位コピーレフト等の運用コストが発生しない
+
+将来、特許保護や明示的な貢献者ライセンス条項が必要になった場合は Apache License 2.0 への移行を検討してください (移行時は過去コントリビュータの同意取得が望ましい)。
