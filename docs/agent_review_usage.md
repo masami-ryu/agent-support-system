@@ -1,6 +1,6 @@
-# Copilot レビュー活用手順
+# AI Agent レビュー活用手順
 
-本書は `copilot_prompts.md` にあるプロンプト群の **具体的な使い方 (どこで・いつ・どう貼るか)** を示します。レビュー指摘は最終的に人間が責任を持って取捨選択してください。
+本書は `review_prompts.md` にあるプロンプト群の **具体的な使い方 (どこで・いつ・どう貼るか)** を示します。レビュー指摘は最終的に人間が責任を持って取捨選択してください。
 
 ---
 ## 1. 目的
@@ -14,7 +14,7 @@
 |------|-------------|------|
 | GitHub Copilot for PRs | 任意 (あれば便利) | PR 画面でのサイドパネル利用 |
 | GitHub Copilot Chat (VS Code 拡張) | 任意 | ローカル差分で事前レビュー |
-| `copilot_prompts.md` | 必須 | プロンプトソース |
+| `review_prompts.md` | 必須 | プロンプトソース |
 | 日本語出力ラッパ | 必須 | 英語出力を防ぐ (`Always return ...`) |
 | セルフレビュー | 必須 | Copilot 依存し過ぎない |
 
@@ -38,15 +38,17 @@
 7. Ready for review → 人間レビュー依頼
 
 ---
-## 5. 最小プロンプト例 (コピペ用)
+## 5. プロンプト例 (コピペ用)
 ```
-Always return the final answer strictly in natural Japanese. Keep code identifiers and proper nouns in original language. Do not add extra English commentary.
-You are a senior software engineer. Review this pull request diff.
+Always return the final answer strictly in natural Japanese. Keep code identifiers and proper nouns in original language. Do not add extra English commentary. Do not echo secrets, tokens, or credentials.
+You are a senior software engineer. Review the diff against the current branch HEAD.
+Refer to docs/review_guide.md and align wording with its categories.
 Tasks:
 1. List high severity issues with prefix [must].
 2. List potential security concerns with prefix [sec].
 3. List performance risks with prefix [perf].
 4. Suggest test gaps with prefix [test].
+5. Use concise bullet points, one issue per line. Avoid style nitpicks. Ignore vendor/, *.lock, and pure formatting changes.
 Return sections: MUST, SECURITY, PERFORMANCE, TESTS, OTHERS.
 Limit to top 12 findings.
 ```
