@@ -46,15 +46,15 @@ AIエージェントが参照する基本設定とルールを定義します。
 
 ### mcp-server/
 ローカルで動作する最小 MCP Server の実装です。以下の 3 層でドキュメントを段階化しています。
-1. `mcp-server/README.md`: すぐ試すための最小手順
-2. `mcp-server/docs/mcp_jsonrpc_learning_guide.md`: MCP/JSON-RPC の基礎と拡張アイデアを段階的に理解
-3. `mcp-server/docs/architecture_decision_record.md`: 技術選定とリスク/将来拡張の正式記録
+1. [README.md](mcp-server/README.md): すぐ試すための最小手順
+2. [docs/mcp_jsonrpc_learning_guide.md](mcp-server/docs/mcp_jsonrpc_learning_guide.md): MCP/JSON-RPC の基礎と拡張アイデアを段階的に理解
+3. [docs/architecture_decision_record.md](mcp-server/docs/architecture_decision_record.md): 技術選定とリスク/将来拡張の正式記録
 
 ### docs/ (ルート)
 レビューと設計ナレッジの中核。現時点で以下を整備済み:
-- `review_guide.md`: 重大度接頭辞・観点チェックリスト・指摘記法基準
-- `review_prompts.md`: 自動レビュー向け統一プロンプト (日本語出力強制ラッパ含む)
-- `agent_review_usage.md`: 利用シーン別の投入タイミング / スコープ絞り込み例 / FAQ
+- [review_guide.md](docs/review_guide.md): 重大度接頭辞・観点チェックリスト・指摘記法基準
+- [review_prompts.md](docs/review_prompts.md): 自動レビュー向け統一プロンプト (日本語出力強制ラッパ含む)
+- [agent_review_usage.md](docs/agent_review_usage.md): 利用シーン別の投入タイミング / スコープ絞り込み例 / FAQ
 
 今後追加予定:
 - 設計パターン (`pattern_*.md`)
@@ -62,14 +62,14 @@ AIエージェントが参照する基本設定とルールを定義します。
 - プロンプト品質評価指標と改善サイクルガイド
 
 ## 利用開始フロー (推奨)
-1. ポリシー読込: `instructions/role.md` と `instructions/language.md` をエージェントへ提示
-2. レビュー基盤理解: `docs/review_guide.md` を通読し接頭辞/観点を把握
-3. 自動レビュー準備: `docs/review_prompts.md` の基本プロンプトを PR テンプレ or スニペットへ登録
-4. 運用手順習得: `docs/agent_review_usage.md` で投入タイミングとスコープ絞り込みを把握
+1. ポリシー読込: [instructions/role.md](instructions/role.md) と [instructions/language.md](instructions/language.md) をエージェントへ提示
+2. レビュー基盤理解: [docs/review_guide.md](docs/review_guide.md) を通読し接頭辞/観点を把握
+3. 自動レビュー準備: [docs/review_prompts.md](docs/review_prompts.md) の基本プロンプトを PR テンプレ or スニペットへ登録
+4. 運用手順習得: [docs/agent_review_usage.md](docs/agent_review_usage.md) で投入タイミングとスコープ絞り込みを把握
 5. 実行: Draft PR 作成 → 基本プロンプト投入 → 指摘反映 → 観点別追加プロンプト
-6. 拡張学習: `mcp-server/README.md` & `mcp_jsonrpc_learning_guide.md` でツール追加方法を理解
-7. アーキ背景参照: `architecture_decision_record.md` で設計判断と将来方針を確認
-8. 運用改善: 指摘ログを蓄積し頻出/冗長指摘を `review_prompts.md` にフィードバック
+6. 拡張学習: [mcp-server/README.md](mcp-server/README.md) & [mcp_jsonrpc_learning_guide.md](mcp-server/docs/mcp_jsonrpc_learning_guide.md) でツール追加方法を理解
+7. アーキ背景参照: [architecture_decision_record.md](mcp-server/docs/architecture_decision_record.md) で設計判断と将来方針を確認
+8. 運用改善: 指摘ログを蓄積し頻出/冗長指摘を [review_prompts.md](docs/review_prompts.md) にフィードバック
 
 ## 今後の計画 (Backlog 抜粋)
 ### ドキュメント/ナレッジ
@@ -92,7 +92,7 @@ AIエージェントが参照する基本設定とルールを定義します。
 
 ## 貢献方法
 1. Issue / PR: 目的 (Problem) / 変更概要 (Change) / 期待効果 (Impact) を簡潔に記述
-2. 恒久的な設計判断は `architecture_decision_record.md` に ADR 追記
+2. 恒久的な設計判断は [architecture_decision_record.md](mcp-server/docs/architecture_decision_record.md) に ADR 追記
 3. 可能な限りテスト (正常/境界/異常) と再現手順を添付
 4. プロンプト/ガイド改善は `[docs]` 接頭辞で PR タイトル開始
 5. 大規模変更は分割方針 (Split Plan) を最初のコメントに含める
