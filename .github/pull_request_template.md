@@ -15,7 +15,7 @@ ROLE:
 You are a senior software engineer.
 
 SCOPE:
-Review the diff between the current branch and the main branch HEAD.
+Review the diff between the current branch and the base branch HEAD (the PR target branch).
 Refer to docs/review_guide.md and align wording with its categories.
 
 TASKS:
