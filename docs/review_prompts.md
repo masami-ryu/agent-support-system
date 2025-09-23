@@ -32,10 +32,7 @@ Limit to top 12 findings.
 ```
 Always return the final answer strictly in natural Japanese. Keep code identifiers and proper nouns in original language. Do not add extra English commentary. Do not echo secrets, tokens, or credentials.
 You are a senior software engineer. Review the diff between the current branch and the main branch HEAD.
-Refer to docs/review_guide.md and align wording with its categories.
 Task focus: Summarize this change for a CHANGELOG entry.
-Include: problem, solution approach, notable risks, migration needs.
-Limit: 5 bullet points max.
 ```
 
 ## セキュリティ特化
