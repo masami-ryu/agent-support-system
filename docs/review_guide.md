@@ -18,7 +18,6 @@ Always return the final answer strictly in natural Japanese. Keep code identifie
 ```
 [must] この関数は責務が大きいため分割を検討してください (例: 検証処理と永続化処理を分離)。
 ```
-英語出力が混入した場合は後述の自動チェック (GitHub Actions) が注意コメントを投稿する可能性があります。
 
 ---
 ## 0. コメント記法 & 重大度ルール
